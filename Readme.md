@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Ivan Zolotov](https://up.htmlacademy.ru/ecmascript/10/user/489369).
-* Наставник: `Неизвестно`.
+* Наставник: [Пётр Двухреченский](https://htmlacademy.ru/profile/id1223515).
 
 ---
 
