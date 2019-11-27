@@ -55,7 +55,7 @@ const createFilmTemplate = () => {
 };
 
 const createFilmDetailsTemplate = () => {
-  return(`
+  return (`
     <section class="film-details">
       <form class="film-details__inner" action="" method="get">
         <div class="form-details__top-container">
@@ -237,7 +237,7 @@ const createMenuTemplate = () => {
       <a href="#favorites" class="main-navigation__item">Favorites <span class="main-navigation__item-count">8</span></a>
       <a href="#stats" class="main-navigation__item main-navigation__item--additional">Stats</a>
     </nav>
-  `)
+  `);
 };
 
 const createSortTemplate = () => {
@@ -248,10 +248,10 @@ const createSortTemplate = () => {
       <li><a href="#" class="sort__button">Sort by rating</a></li>
     </ul>
   `);
-}
+};
 
 const createShowMoreTemplate = () => {
-  return(`
+  return (`
     <button class="films-list__show-more">Show more</button>
   `);
 };
