@@ -1,5 +1,3 @@
-'use strict';
-
 const ALL_FILMS_COUNT = 5;
 const TOP_RATED_FILMS_COUNT = 2;
 const MOST_COMMENTED_FILMS_COUNT = 2;
