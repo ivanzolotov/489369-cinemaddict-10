@@ -35,6 +35,7 @@ const generateFilm = () => {
   translatedName = translatedName ? translatedName : originalName;
   const previewPoster = getRandomArrayItem(POSTERS);
   const fullPoster = previewPoster;
+  const rating = (~~(Math.random() * 101) / 10).toFixed(1);
 
   return {
     name: {
@@ -45,6 +46,7 @@ const generateFilm = () => {
       preview: previewPoster,
       full: fullPoster,
     },
+    rating,
   };
 };
 

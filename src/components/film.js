@@ -1,11 +1,12 @@
 export const createFilmTemplate = (film) => {
+  const {rating} = film;
   const translatedName = film.name.translated;
   const previewPoster = film.poster.preview;
 
   return (`
     <article class="film-card">
       <h3 class="film-card__title">${translatedName}</h3>
-      <p class="film-card__rating">6.3</p>
+      <p class="film-card__rating">${rating}</p>
       <p class="film-card__info">
         <span class="film-card__year">1936</span>
         <span class="film-card__duration">16m</span>
