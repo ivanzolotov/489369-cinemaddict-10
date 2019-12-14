@@ -1,5 +1,6 @@
 export const createFilmTemplate = (film) => {
   const translatedName = film.name.translated;
+  const previewPoster = film.poster.preview;
 
   return (`
     <article class="film-card">
@@ -10,7 +11,7 @@ export const createFilmTemplate = (film) => {
         <span class="film-card__duration">16m</span>
         <span class="film-card__genre">Cartoon</span>
       </p>
-      <img src="./images/posters/popeye-meets-sinbad.png" alt="" class="film-card__poster">
+      <img src="/images/posters/${previewPoster}" alt="" class="film-card__poster">
       <p class="film-card__description">In this short, Sindbad the Sailor (presumably Bluto playing a "role") proclaims himself, in song, to be the greatest sailor, adventurer and…</p>
       <a class="film-card__comments">0 comments</a>
       <form class="film-card__controls">

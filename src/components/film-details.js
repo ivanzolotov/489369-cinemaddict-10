@@ -1,6 +1,7 @@
 const createFilmDetailsTemplate = (film) => {
   const originalName = film.name.original;
   const translatedName = film.name.translated;
+  const fullPoster = film.poster.full;
 
   return (`
     <section class="film-details">
@@ -11,7 +12,7 @@ const createFilmDetailsTemplate = (film) => {
           </div>
           <div class="film-details__info-wrap">
             <div class="film-details__poster">
-              <img class="film-details__poster-img" src="./images/posters/the-great-flamarion.jpg" alt="">
+              <img class="film-details__poster-img" src="/images/posters/${fullPoster}" alt="">
 
               <p class="film-details__age">18+</p>
             </div>

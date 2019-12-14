@@ -18,16 +18,32 @@ const FILM_NAMES = [
   {original: `Murder on the Orient Express`},
   {original: `Shutter Island`},
   {original: `Aladdin 2: The Return of Jafar`},
-]
+];
+
+const POSTERS = [
+  `made-for-each-other.png`,
+  `popeye-meets-sinbad.png`,
+  `sagebrush-trail.jpg`,
+  `santa-claus-conquers-the-martians.jpg`,
+  `the-dance-of-life.jpg`,
+  `the-great-flamarion.jpg`,
+  `the-man-with-the-golden-arm.jpg`,
+];
 
 const generateFilm = () => {
-  let {original, translated} = getRandomArrayItem(FILM_NAMES);
-  translated = translated ? translated : original;
+  let {original:originalName, translated:translatedName} = getRandomArrayItem(FILM_NAMES);
+  translatedName = translatedName ? translatedName : originalName;
+  const previewPoster = getRandomArrayItem(POSTERS);
+  const fullPoster = previewPoster;
 
   return {
     name: {
-      original,
-      translated,
+      original: originalName,
+      translated: translatedName,
+    },
+    poster: {
+      preview: previewPoster,
+      full: fullPoster,
     },
   };
 };
