@@ -1,5 +1,5 @@
 const createFilmDetailsTemplate = (film) => {
-  const {rating} = film;
+  const {rating, age} = film;
   const originalName = film.name.original;
   const translatedName = film.name.translated;
   const fullPoster = film.poster.full;
@@ -15,7 +15,7 @@ const createFilmDetailsTemplate = (film) => {
             <div class="film-details__poster">
               <img class="film-details__poster-img" src="/images/posters/${fullPoster}" alt="">
 
-              <p class="film-details__age">18+</p>
+              <p class="film-details__age">${age}+</p>
             </div>
 
             <div class="film-details__info">
