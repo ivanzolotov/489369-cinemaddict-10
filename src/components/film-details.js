@@ -1,8 +1,12 @@
 const createFilmDetailsTemplate = (film) => {
-  const {rating, age} = film;
+  const {rating, age, staff} = film;
   const originalName = film.name.original;
   const translatedName = film.name.translated;
   const fullPoster = film.poster.full;
+
+  const directors = staff.directors.join(`, `);
+  const writers = staff.writers.join(`, `);
+  const actors = staff.actors.join(`, `);
 
   return (`
     <section class="film-details">
@@ -14,34 +18,30 @@ const createFilmDetailsTemplate = (film) => {
           <div class="film-details__info-wrap">
             <div class="film-details__poster">
               <img class="film-details__poster-img" src="/images/posters/${fullPoster}" alt="">
-
               <p class="film-details__age">${age}+</p>
             </div>
-
             <div class="film-details__info">
               <div class="film-details__info-head">
                 <div class="film-details__title-wrap">
                   <h3 class="film-details__title">${translatedName}</h3>
                   <p class="film-details__title-original">Original: ${originalName}</p>
                 </div>
-
                 <div class="film-details__rating">
                   <p class="film-details__total-rating">${rating}</p>
                 </div>
               </div>
-
               <table class="film-details__table">
                 <tr class="film-details__row">
                   <td class="film-details__term">Director</td>
-                  <td class="film-details__cell">Anthony Mann</td>
+                  <td class="film-details__cell">${directors}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Writers</td>
-                  <td class="film-details__cell">Anne Wigton, Heinz Herald, Richard Weil</td>
+                  <td class="film-details__cell">${writers}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Actors</td>
-                  <td class="film-details__cell">Erich von Stroheim, Mary Beth Hughes, Dan Duryea</td>
+                  <td class="film-details__cell">${actors}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Release Date</td>

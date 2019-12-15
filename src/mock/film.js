@@ -1,4 +1,4 @@
-import {getRandomArrayItem} from '../utils.js';
+import {getRandomArrayItem, getRandomArrayItems} from '../utils.js';
 
 const FILMS_NUMBER = 15;
 
@@ -32,6 +32,8 @@ const POSTERS = [
 
 const AGES = [0, 6, 12, 18];
 
+const STAFF = [`Anne Wigton`, `Heinz Herald`, `Richard Weil`, `Erich von Stroheim`, `Mary Beth Hughes`, `Dan Duryea`, `Anthony Mann`];
+
 const DESCRIPTIONS = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`;
 
 const generateFilm = () => {
@@ -39,8 +41,6 @@ const generateFilm = () => {
   translatedName = translatedName ? translatedName : originalName;
   const previewPoster = getRandomArrayItem(POSTERS);
   const fullPoster = previewPoster;
-  const rating = (~~(Math.random() * 101) / 10).toFixed(1);
-  const age = getRandomArrayItem(AGES);
 
   return {
     name: {
@@ -51,8 +51,13 @@ const generateFilm = () => {
       preview: previewPoster,
       full: fullPoster,
     },
-    rating,
-    age,
+    rating: (~~(Math.random() * 101) / 10).toFixed(1),
+    age: getRandomArrayItem(AGES),
+    staff: {
+      directors: getRandomArrayItems(STAFF, 1),
+      writers: getRandomArrayItems(STAFF, 3),
+      actors: getRandomArrayItems(STAFF, 3),
+    },
   };
 };
 
