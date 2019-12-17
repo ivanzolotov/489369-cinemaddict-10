@@ -42,6 +42,8 @@ const STAFF = [`Anne Wigton`, `Heinz Herald`, `Richard Weil`, `Erich von Strohei
 
 const DESCRIPTIONS = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`;
 
+const GENRES = [`Drama`, `Mystery`, `Comedy`, `Film-Noir`, `Horor`];
+
 const DURATION_MAXIMUM = 200;
 
 const generateFilm = () => {
@@ -70,6 +72,7 @@ const generateFilm = () => {
     date: getRandomDateInPast(),
     duration: ~~(Math.random() * (DURATION_MAXIMUM + 1)),
     country: getRandomArrayItem(COUNTRIES),
+    genres: getRandomArrayItems(GENRES, 3),
     description: {
       short: description,
       full: description,

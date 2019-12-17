@@ -1,11 +1,12 @@
 import {formatDuration} from '../utils.js';
 
 export const createFilmTemplate = (film) => {
-  const {rating, date, duration, description: {short: description}} = film;
+  const {rating, date, duration, genres, description: {short: description}} = film;
   const translatedName = film.name.translated;
   const previewPoster = film.poster.preview;
   const year = date.getFullYear();
   const formatedDuration = formatDuration(duration);
+  const genre = genres[0];
 
   return (`
     <article class="film-card">
@@ -14,7 +15,7 @@ export const createFilmTemplate = (film) => {
       <p class="film-card__info">
         <span class="film-card__year">${year}</span>
         <span class="film-card__duration">${formatedDuration}</span>
-        <span class="film-card__genre">Cartoon</span>
+        <span class="film-card__genre">${genre}</span>
       </p>
       <img src="/images/posters/${previewPoster}" alt="" class="film-card__poster">
       <p class="film-card__description">${description}</p>

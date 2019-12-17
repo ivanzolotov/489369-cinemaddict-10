@@ -1,7 +1,7 @@
 import {MONTHS, formatDuration} from '../utils.js';
 
 const createFilmDetailsTemplate = (film) => {
-  const {rating, age, staff, date, duration, country, description: {full: description}} = film;
+  const {rating, age, staff, date, duration, country, genres, description: {full: description}} = film;
   const originalName = film.name.original;
   const translatedName = film.name.translated;
   const fullPoster = film.poster.full;
@@ -11,6 +11,7 @@ const createFilmDetailsTemplate = (film) => {
   const actors = staff.actors.join(`, `);
   const fullDate = `${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
   const formatedDuration = formatDuration(duration);
+  const genresMarkup = () => genres.map((genre) => `<span class="film-details__genre">${genre}</span>`).join(`\n`);
 
   return (`
     <section class="film-details">
@@ -62,9 +63,8 @@ const createFilmDetailsTemplate = (film) => {
                 <tr class="film-details__row">
                   <td class="film-details__term">Genres</td>
                   <td class="film-details__cell">
-                    <span class="film-details__genre">Drama</span>
-                    <span class="film-details__genre">Film-Noir</span>
-                    <span class="film-details__genre">Mystery</span></td>
+                    ${genresMarkup()}
+                  </td>
                 </tr>
               </table>
 
