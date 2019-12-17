@@ -30,6 +30,12 @@ const POSTERS = [
   `the-man-with-the-golden-arm.jpg`,
 ];
 
+const COUNTRIES = [
+  `USA`,
+  `Russia`,
+  `Germany`,
+]
+
 const AGES = [0, 6, 12, 18];
 
 const STAFF = [`Anne Wigton`, `Heinz Herald`, `Richard Weil`, `Erich von Stroheim`, `Mary Beth Hughes`, `Dan Duryea`, `Anthony Mann`];
@@ -63,6 +69,7 @@ const generateFilm = () => {
     },
     date: getRandomDateInPast(),
     duration: ~~(Math.random() * (DURATION_MAXIMUM + 1)),
+    country: getRandomArrayItem(COUNTRIES),
     description: {
       short: description,
       full: description,

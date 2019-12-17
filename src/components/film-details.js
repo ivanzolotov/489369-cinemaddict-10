@@ -1,7 +1,7 @@
 import {MONTHS, formatDuration} from '../utils.js';
 
 const createFilmDetailsTemplate = (film) => {
-  const {rating, age, staff, date, duration, description: {full: description}} = film;
+  const {rating, age, staff, date, duration, country, description: {full: description}} = film;
   const originalName = film.name.original;
   const translatedName = film.name.translated;
   const fullPoster = film.poster.full;
@@ -57,7 +57,7 @@ const createFilmDetailsTemplate = (film) => {
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Country</td>
-                  <td class="film-details__cell">USA</td>
+                  <td class="film-details__cell">${country}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Genres</td>
