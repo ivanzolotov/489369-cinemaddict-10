@@ -41,6 +41,7 @@ const generateFilm = () => {
   translatedName = translatedName ? translatedName : originalName;
   const previewPoster = getRandomArrayItem(POSTERS);
   const fullPoster = previewPoster;
+  const description = getRandomArrayItems(DESCRIPTIONS.split(`. `), ~~(Math.random() * 2) + 1).join(`. `) + `.`;
 
   return {
     name: {
@@ -57,6 +58,10 @@ const generateFilm = () => {
       directors: getRandomArrayItems(STAFF, 1),
       writers: getRandomArrayItems(STAFF, 3),
       actors: getRandomArrayItems(STAFF, 3),
+    },
+    description: {
+      short: description,
+      full: description,
     },
   };
 };

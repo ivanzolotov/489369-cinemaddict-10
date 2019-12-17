@@ -1,5 +1,5 @@
 export const createFilmTemplate = (film) => {
-  const {rating} = film;
+  const {rating, description: {short: description}} = film;
   const translatedName = film.name.translated;
   const previewPoster = film.poster.preview;
 
@@ -13,7 +13,7 @@ export const createFilmTemplate = (film) => {
         <span class="film-card__genre">Cartoon</span>
       </p>
       <img src="/images/posters/${previewPoster}" alt="" class="film-card__poster">
-      <p class="film-card__description">In this short, Sindbad the Sailor (presumably Bluto playing a "role") proclaims himself, in song, to be the greatest sailor, adventurer and…</p>
+      <p class="film-card__description">${description.short}</p>
       <a class="film-card__comments">0 comments</a>
       <form class="film-card__controls">
         <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist film-card__controls-item--active">Add to watchlist</button>
