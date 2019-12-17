@@ -1,4 +1,4 @@
-import {getRandomArrayItem, getRandomArrayItems} from '../utils.js';
+import {getRandomArrayItem, getRandomArrayItems, getRandomDateInPast} from '../utils.js';
 
 const FILMS_NUMBER = 15;
 
@@ -59,6 +59,7 @@ const generateFilm = () => {
       writers: getRandomArrayItems(STAFF, 3),
       actors: getRandomArrayItems(STAFF, 3),
     },
+    date: getRandomDateInPast(),
     description: {
       short: description,
       full: description,

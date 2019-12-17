@@ -1,5 +1,7 @@
+import {MONTHS} from '../utils.js';
+
 const createFilmDetailsTemplate = (film) => {
-  const {rating, age, staff, description: {full: description}} = film;
+  const {rating, age, staff, date, description: {full: description}} = film;
   const originalName = film.name.original;
   const translatedName = film.name.translated;
   const fullPoster = film.poster.full;
@@ -7,6 +9,7 @@ const createFilmDetailsTemplate = (film) => {
   const directors = staff.directors.join(`, `);
   const writers = staff.writers.join(`, `);
   const actors = staff.actors.join(`, `);
+  const fullDate = `${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
 
   return (`
     <section class="film-details">
@@ -45,7 +48,7 @@ const createFilmDetailsTemplate = (film) => {
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Release Date</td>
-                  <td class="film-details__cell">30 March 1945</td>
+                  <td class="film-details__cell">${fullDate}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Runtime</td>
