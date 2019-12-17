@@ -11,6 +11,7 @@ import {generateFilm, generateFilms} from './mock/film.js';
 const ALL_FILMS_COUNT = 5;
 const TOP_RATED_FILMS_COUNT = 2;
 const MOST_COMMENTED_FILMS_COUNT = 2;
+const VIEWED_FILMS_NUMBER = 15;
 
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
@@ -21,7 +22,7 @@ const films = generateFilms();
 const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 
-render(siteHeaderElement, createProfileRatingTemplate());
+render(siteHeaderElement, createProfileRatingTemplate(VIEWED_FILMS_NUMBER));
 render(siteMainElement, createMenuTemplate());
 render(siteMainElement, createSortTemplate());
 render(siteMainElement, createFilmsTemplate());
