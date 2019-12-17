@@ -1,7 +1,7 @@
-import {MONTHS} from '../utils.js';
+import {MONTHS, formatDuration} from '../utils.js';
 
 const createFilmDetailsTemplate = (film) => {
-  const {rating, age, staff, date, description: {full: description}} = film;
+  const {rating, age, staff, date, duration, description: {full: description}} = film;
   const originalName = film.name.original;
   const translatedName = film.name.translated;
   const fullPoster = film.poster.full;
@@ -10,6 +10,7 @@ const createFilmDetailsTemplate = (film) => {
   const writers = staff.writers.join(`, `);
   const actors = staff.actors.join(`, `);
   const fullDate = `${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+  const formatedDuration = formatDuration(duration);
 
   return (`
     <section class="film-details">
@@ -52,7 +53,7 @@ const createFilmDetailsTemplate = (film) => {
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Runtime</td>
-                  <td class="film-details__cell">1h 18m</td>
+                  <td class="film-details__cell">${formatedDuration}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Country</td>

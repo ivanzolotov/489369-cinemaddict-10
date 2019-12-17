@@ -32,7 +32,11 @@ const getRandomDateInPast = (years = 50) => {
   return targetDate;
 };
 
-const formatDuration = (duration) => `${~~(duration / 60)}h ${duration % 60}m`;
+const formatDuration = (duration) => {
+  const hours = ~~(duration / 60) ? `${~~(duration / 60)}h ` : ``;
+  const minutes = `${duration % 60}m`;
+  return (hours + minutes);
+};
 
 export {
   MONTHS,

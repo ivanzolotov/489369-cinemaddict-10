@@ -1,8 +1,11 @@
+import {formatDuration} from '../utils.js';
+
 export const createFilmTemplate = (film) => {
-  const {rating, date, description: {short: description}} = film;
+  const {rating, date, duration, description: {short: description}} = film;
   const translatedName = film.name.translated;
   const previewPoster = film.poster.preview;
   const year = date.getFullYear();
+  const formatedDuration = formatDuration(duration);
 
   return (`
     <article class="film-card">
@@ -10,7 +13,7 @@ export const createFilmTemplate = (film) => {
       <p class="film-card__rating">${rating}</p>
       <p class="film-card__info">
         <span class="film-card__year">${year}</span>
-        <span class="film-card__duration">16m</span>
+        <span class="film-card__duration">${formatedDuration}</span>
         <span class="film-card__genre">Cartoon</span>
       </p>
       <img src="/images/posters/${previewPoster}" alt="" class="film-card__poster">
