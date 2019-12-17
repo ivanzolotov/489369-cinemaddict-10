@@ -45,6 +45,7 @@ const DESCRIPTIONS = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. C
 const GENRES = [`Drama`, `Mystery`, `Comedy`, `Film-Noir`, `Horor`];
 
 const DURATION_MAXIMUM = 200;
+const COMMENTS_MAXIMUM = 10;
 
 const generateFilm = () => {
   let {original:originalName, translated:translatedName} = getRandomArrayItem(FILM_NAMES);
@@ -77,6 +78,7 @@ const generateFilm = () => {
       short: description,
       full: description,
     },
+    comments: ~~(Math.random() * (COMMENTS_MAXIMUM + 1)),
   };
 };
 

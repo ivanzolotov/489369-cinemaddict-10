@@ -1,7 +1,7 @@
 import {MONTHS, formatDuration} from '../utils.js';
 
 const createFilmDetailsTemplate = (film) => {
-  const {rating, age, staff, date, duration, country, genres, description: {full: description}} = film;
+  const {rating, age, staff, date, duration, country, genres, description: {full: description}, comments} = film;
   const originalName = film.name.original;
   const translatedName = film.name.translated;
   const fullPoster = film.poster.full;

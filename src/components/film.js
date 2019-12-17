@@ -1,7 +1,7 @@
 import {formatDuration} from '../utils.js';
 
 export const createFilmTemplate = (film) => {
-  const {rating, date, duration, genres, description: {short: description}} = film;
+  const {rating, date, duration, genres, description: {short: description}, comments} = film;
   const translatedName = film.name.translated;
   const previewPoster = film.poster.preview;
   const year = date.getFullYear();
@@ -19,7 +19,7 @@ export const createFilmTemplate = (film) => {
       </p>
       <img src="/images/posters/${previewPoster}" alt="" class="film-card__poster">
       <p class="film-card__description">${description}</p>
-      <a class="film-card__comments">0 comments</a>
+      <a class="film-card__comments">${comments} comments</a>
       <form class="film-card__controls">
         <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist film-card__controls-item--active">Add to watchlist</button>
         <button class="film-card__controls-item button film-card__controls-item--mark-as-watched film-card__controls-item--active">Mark as watched</button>
