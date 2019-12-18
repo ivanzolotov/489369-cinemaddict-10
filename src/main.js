@@ -5,8 +5,11 @@ import { createMenuTemplate } from './components/menu.js';
 import { createSortTemplate } from './components/sort.js';
 import { createShowMoreTemplate } from './components/show-more.js';
 import { createProfileRatingTemplate } from './components/profile-rating.js';
+import { createCommentFormTemplate } from './components/comment-form.js';
+import { createCommentsTemplate } from './components/comments.js';
 
 import {generateFilm, generateFilms} from './mock/film.js';
+import {generateComment, generateComments} from './mock/comment.js';
 import {generateFilters} from './mock/filter.js';
 
 const ALL_FILMS_COUNT = 5;
@@ -19,6 +22,7 @@ const render = (container, template, place = `beforeend`) => {
 };
 
 const films = generateFilms();
+const comments = generateComments();
 
 const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
@@ -42,3 +46,6 @@ const mostCommentedFilmsElement = siteMainElement.querySelector(`.films-list--mo
 films.slice(0, MOST_COMMENTED_FILMS_COUNT).forEach((film) => render(mostCommentedFilmsElement, createFilmTemplate(film)))
 
 render(document.body, createFilmDetailsTemplate(generateFilm()));
+const filmDetailsCommentsWrapElement = document.querySelector(`.film-details__comments-wrap`);
+render(filmDetailsCommentsWrapElement, createCommentsTemplate(comments));
+render(filmDetailsCommentsWrapElement, createCommentFormTemplate());

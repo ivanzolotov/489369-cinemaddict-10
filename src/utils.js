@@ -38,9 +38,9 @@ const formatDuration = (duration) => {
   return (hours + minutes);
 };
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+
+const makeTwoDigitNumber = (value) => (value < 10 ? `0${value}` : String(value));
 
 export {
   MONTHS,
@@ -50,4 +50,5 @@ export {
   getRandomDateInPast,
   formatDuration,
   capitalizeFirstLetter,
+  makeTwoDigitNumber,
 };
