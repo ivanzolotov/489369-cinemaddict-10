@@ -7,6 +7,7 @@ import { createShowMoreTemplate } from './components/show-more.js';
 import { createProfileRatingTemplate } from './components/profile-rating.js';
 
 import {generateFilm, generateFilms} from './mock/film.js';
+import {generateFilters} from './mock/filter.js';
 
 const ALL_FILMS_COUNT = 5;
 const TOP_RATED_FILMS_COUNT = 2;
@@ -23,7 +24,7 @@ const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 
 render(siteHeaderElement, createProfileRatingTemplate(VIEWED_FILMS_NUMBER));
-render(siteMainElement, createMenuTemplate());
+render(siteMainElement, createMenuTemplate(generateFilters()));
 render(siteMainElement, createSortTemplate());
 render(siteMainElement, createFilmsTemplate());
 

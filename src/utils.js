@@ -38,6 +38,10 @@ const formatDuration = (duration) => {
   return (hours + minutes);
 };
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 export {
   MONTHS,
   getRandomBoolean,
@@ -45,4 +49,5 @@ export {
   getRandomArrayItems,
   getRandomDateInPast,
   formatDuration,
+  capitalizeFirstLetter,
 };
