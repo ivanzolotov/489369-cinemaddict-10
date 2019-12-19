@@ -1,6 +1,8 @@
 import {getRandomArrayItem, getRandomArrayItems, getRandomDateInPast} from '../utils.js';
 
-const FILMS_NUMBER = 15;
+const DEFAULT_FILMS_NUMBER = 15;
+const DURATION_MAXIMUM = 200;
+const COMMENTS_MAXIMUM = 10;
 
 const FILM_NAMES = [
   {original: `Das Leben der Anderen`, translated: `The Lives of Others`},
@@ -34,25 +36,19 @@ const COUNTRIES = [
   `USA`,
   `Russia`,
   `Germany`,
-]
+];
 
 const AGES = [0, 6, 12, 18];
-
 const STAFF = [`Anne Wigton`, `Heinz Herald`, `Richard Weil`, `Erich von Stroheim`, `Mary Beth Hughes`, `Dan Duryea`, `Anthony Mann`];
-
 const DESCRIPTIONS = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`;
-
 const GENRES = [`Drama`, `Mystery`, `Comedy`, `Film-Noir`, `Horor`];
 
-const DURATION_MAXIMUM = 200;
-const COMMENTS_MAXIMUM = 10;
-
 const generateFilm = () => {
-  let {original:originalName, translated:translatedName} = getRandomArrayItem(FILM_NAMES);
-  translatedName = translatedName ? translatedName : originalName;
   const previewPoster = getRandomArrayItem(POSTERS);
   const fullPoster = previewPoster;
   const description = getRandomArrayItems(DESCRIPTIONS.split(`. `), ~~(Math.random() * 2) + 1).join(`. `) + `.`;
+  let {original: originalName, translated: translatedName} = getRandomArrayItem(FILM_NAMES);
+  translatedName = translatedName ? translatedName : originalName;
 
   return {
     name: {
@@ -82,14 +78,14 @@ const generateFilm = () => {
   };
 };
 
-const generateFilms = (numberOfFilms = FILMS_NUMBER) => {
+const generateFilms = (numberOfFilms = DEFAULT_FILMS_NUMBER) => {
   const films = [];
 
   for (let i = 0; i < numberOfFilms; i++) {
     films.push(generateFilm());
-  };
+  }
 
   return films;
-}
+};
 
 export {generateFilm, generateFilms};

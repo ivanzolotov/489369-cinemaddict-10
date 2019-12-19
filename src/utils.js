@@ -42,6 +42,10 @@ const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + strin
 
 const makeTwoDigitNumber = (value) => (value < 10 ? `0${value}` : String(value));
 
+const render = (container, template, place = `beforeend`) => {
+  container.insertAdjacentHTML(place, template);
+};
+
 export {
   MONTHS,
   getRandomBoolean,
@@ -51,4 +55,5 @@ export {
   formatDuration,
   capitalizeFirstLetter,
   makeTwoDigitNumber,
+  render,
 };

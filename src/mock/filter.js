@@ -1,4 +1,4 @@
-const NUMBER_OF_FILMS = 5;
+const DEFAULT_FILMS_NUMBER = 5;
 
 const filterNames = [
   `all movies`,
@@ -7,7 +7,7 @@ const filterNames = [
   `favorites`,
 ];
 
-const generateFilters = (films = new Array(NUMBER_OF_FILMS)) => {
+const generateFilters = (films = new Array(DEFAULT_FILMS_NUMBER)) => {
   return filterNames.map((filter) => {
     return {
       name: filter,

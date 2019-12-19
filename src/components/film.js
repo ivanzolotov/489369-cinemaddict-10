@@ -1,9 +1,10 @@
 import {formatDuration} from '../utils.js';
 
-export const createFilmTemplate = (film) => {
+const createFilmTemplate = (film) => {
   const {rating, date, duration, genres, description: {short: description}, comments} = film;
   const translatedName = film.name.translated;
   const previewPoster = film.poster.preview;
+
   const year = date.getFullYear();
   const formatedDuration = formatDuration(duration);
   const genre = genres[0];
@@ -28,3 +29,5 @@ export const createFilmTemplate = (film) => {
     </article>
   `);
 };
+
+export {createFilmTemplate};

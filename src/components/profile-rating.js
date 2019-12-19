@@ -1,8 +1,18 @@
-export const createProfileRatingTemplate = (viewedFilmsNumber = 0) => {
+const createProfileRatingTemplate = (viewedFilmsNumber = 0) => {
   let rating;
-  if (viewedFilmsNumber > 0) rating = `Novice`;
-  if (viewedFilmsNumber > 10) rating = `Fan`;
-  if (viewedFilmsNumber > 20) rating = `Movie Buff`;
+
+  if (viewedFilmsNumber > 0) {
+    rating = `Novice`;
+  }
+
+  if (viewedFilmsNumber > 10) {
+    rating = `Fan`;
+  }
+
+  if (viewedFilmsNumber > 20) {
+    rating = `Movie Buff`;
+  }
+
   const ratingMarkup = rating ? `<p class="profile__rating">${rating}</p>` : ``;
 
   return (`
@@ -12,3 +22,5 @@ export const createProfileRatingTemplate = (viewedFilmsNumber = 0) => {
     </section>
   `);
 };
+
+export {createProfileRatingTemplate};
