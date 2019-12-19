@@ -19,6 +19,14 @@ const TOP_RATED_FILMS_COUNT = 2;
 const MOST_COMMENTED_FILMS_COUNT = 2;
 const VIEWED_FILMS_NUMBER = 15;
 
+const getTopRatedFilms = (films, quantity) => {
+  return films.slice().sort((a, b) => b.rating - a.rating).slice(0, quantity);
+};
+
+const getMostCommentedFilms = (films, quantity) => {
+  return films.slice().sort((a, b) => b.comments - a.comments).slice(0, quantity);
+};
+
 const films = generateFilms();
 const comments = generateComments();
 
@@ -37,10 +45,10 @@ const allFilmsElement = allFilmsContainerElement.querySelector(`.films-list__con
 films.slice(0, ALL_FILMS_COUNT).forEach((film) => render(allFilmsElement, createFilmTemplate(film)))
 
 const topRatedFilmsElement = siteMainElement.querySelector(`.films-list--top-rated .films-list__container`);
-films.slice(0, TOP_RATED_FILMS_COUNT).forEach((film) => render(topRatedFilmsElement, createFilmTemplate(film)))
+getTopRatedFilms(films, TOP_RATED_FILMS_COUNT).forEach((film) => render(topRatedFilmsElement, createFilmTemplate(film)));
 
 const mostCommentedFilmsElement = siteMainElement.querySelector(`.films-list--most-commented .films-list__container`);
-films.slice(0, MOST_COMMENTED_FILMS_COUNT).forEach((film) => render(mostCommentedFilmsElement, createFilmTemplate(film)))
+getMostCommentedFilms(films, MOST_COMMENTED_FILMS_COUNT).forEach((film) => render(mostCommentedFilmsElement, createFilmTemplate(film)));
 
 render(document.body, createFilmDetailsTemplate(generateFilm()));
 const filmDetailsCommentsWrapElement = document.querySelector(`.film-details__comments-wrap`);
