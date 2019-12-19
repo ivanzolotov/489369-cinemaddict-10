@@ -14,9 +14,12 @@ import {generateFilm, generateFilms} from './mock/film.js';
 import {generateComments} from './mock/comment.js';
 import {generateFilters} from './mock/filter.js';
 
-const ALL_FILMS_COUNT = 5;
+const FILM_COUNT = 30;
+const FILMS_COUNT_ON_START = 5;
+const FILMS_COUNT_BY_BUTTON = 5;
 const TOP_RATED_FILMS_COUNT = 2;
 const MOST_COMMENTED_FILMS_COUNT = 2;
+
 const VIEWED_FILMS_NUMBER = 15;
 
 const getTopRatedFilms = (films, quantity) => {
@@ -27,7 +30,13 @@ const getMostCommentedFilms = (films, quantity) => {
   return films.slice().sort((a, b) => b.comments - a.comments).slice(0, quantity);
 };
 
-const films = generateFilms();
+const removePointlessLoadMoreButton = (loadMoreButtonElement, showedFilms, loadedFilms) => {
+  if (showedFilms >= loadedFilms) {
+    loadMoreButtonElement.remove();
+  }
+};
+
+const films = generateFilms(FILM_COUNT);
 const comments = generateComments();
 
 const siteHeaderElement = document.querySelector(`.header`);
@@ -41,8 +50,20 @@ render(siteMainElement, createFilmsTemplate());
 const allFilmsContainerElement = siteMainElement.querySelector(`.films-list`);
 render(allFilmsContainerElement, createShowMoreTemplate());
 
+const loadMoreButtonElement = allFilmsContainerElement.querySelector(`.films-list__show-more`);
+let visibleFilmsCount = FILMS_COUNT_ON_START;
+removePointlessLoadMoreButton(loadMoreButtonElement, visibleFilmsCount, films.length);
+
 const allFilmsElement = allFilmsContainerElement.querySelector(`.films-list__container`);
-films.slice(0, ALL_FILMS_COUNT).forEach((film) => render(allFilmsElement, createFilmTemplate(film)))
+films.slice(0, FILMS_COUNT_ON_START).forEach((film) => render(allFilmsElement, createFilmTemplate(film)))
+
+loadMoreButtonElement.addEventListener(`click`, () => {
+  const currentVisibleFilmsCount = visibleFilmsCount;
+  visibleFilmsCount += FILMS_COUNT_BY_BUTTON;
+
+  films.slice(currentVisibleFilmsCount, visibleFilmsCount).forEach((film) => render(allFilmsElement, createFilmTemplate(film)));
+  removePointlessLoadMoreButton(loadMoreButtonElement, visibleFilmsCount, films.length);
+});
 
 const topRatedFilmsElement = siteMainElement.querySelector(`.films-list--top-rated .films-list__container`);
 getTopRatedFilms(films, TOP_RATED_FILMS_COUNT).forEach((film) => render(topRatedFilmsElement, createFilmTemplate(film)));
