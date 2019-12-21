@@ -1,3 +1,5 @@
+import {createElement} from '../utils.js';
+
 const createProfileRatingTemplate = (viewedFilmsNumber = 0) => {
   let rating;
 
@@ -15,7 +17,7 @@ const createProfileRatingTemplate = (viewedFilmsNumber = 0) => {
 
   const ratingMarkup = rating ? `<p class="profile__rating">${rating}</p>` : ``;
 
-  return (`
+  return createElement(`
     <section class="header__profile profile">
       ${ratingMarkup}
       <img class="profile__avatar" src="images/bitmap@2x.png" alt="Avatar" width="35" height="35">

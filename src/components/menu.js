@@ -1,4 +1,4 @@
-import {capitalizeFirstLetter} from '../utils.js';
+import {capitalizeFirstLetter, createElement} from '../utils.js';
 
 const createFilterMarkup = (filter, index) => {
   const hash = `#${filter.name.split(` `)[0]}`;
@@ -19,7 +19,7 @@ const createMenuTemplate = (filters) => {
     .map((filter, i) => createFilterMarkup(filter, i))
     .join(`\n`);
 
-  return (`
+  return createElement(`
     <nav class="main-navigation">
       ${filtersMarkup}
     </nav>

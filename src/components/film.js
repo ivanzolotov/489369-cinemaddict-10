@@ -1,4 +1,4 @@
-import {formatDuration} from '../utils.js';
+import {formatDuration, createElement} from '../utils.js';
 
 const createFilmTemplate = (film) => {
   const {rating, date, duration, genres, description: {short: description}, comments} = film;
@@ -9,7 +9,7 @@ const createFilmTemplate = (film) => {
   const formatedDuration = formatDuration(duration);
   const genre = genres[0];
 
-  return (`
+  return createElement(`
     <article class="film-card">
       <h3 class="film-card__title">${translatedName}</h3>
       <p class="film-card__rating">${rating}</p>

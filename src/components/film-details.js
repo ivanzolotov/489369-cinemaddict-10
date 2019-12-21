@@ -1,4 +1,4 @@
-import {MONTHS, formatDuration} from '../utils.js';
+import {MONTHS, formatDuration, createElement} from '../utils.js';
 
 const createFilmDetailsTemplate = (film) => {
   const {rating, age, staff, date, duration, country, genres, description: {full: description}, comments} = film;
@@ -15,8 +15,8 @@ const createFilmDetailsTemplate = (film) => {
     .map((genre) => `<span class="film-details__genre">${genre}</span>`)
     .join(`\n`);
 
-  return (`
-    <section class="film-details">
+  return createElement(`
+    <section class="film-details" style="display:none">
       <form class="film-details__inner" action="" method="get">
         <div class="form-details__top-container">
           <div class="film-details__close">

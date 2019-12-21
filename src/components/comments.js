@@ -1,4 +1,4 @@
-import {makeTwoDigitNumber} from '../utils.js';
+import {makeTwoDigitNumber, createElement} from '../utils.js';
 
 const commentMarkup = (comment) => {
   const {emotion, description, author, date} = comment;
@@ -30,7 +30,7 @@ const commentMarkup = (comment) => {
 
 const createCommentsTemplate = (comments) => {
   const commentsMarkup = comments.map((comment) => commentMarkup(comment)).join(`\n`);
-  return (`
+  return createElement(`
     <ul class="film-details__comments-list">
       ${commentsMarkup}
     </ul>
