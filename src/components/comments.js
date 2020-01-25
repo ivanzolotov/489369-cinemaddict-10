@@ -30,11 +30,32 @@ const commentMarkup = (comment) => {
 
 const createCommentsTemplate = (comments) => {
   const commentsMarkup = comments.map((comment) => commentMarkup(comment)).join(`\n`);
-  return createElement(`
+  return (`
     <ul class="film-details__comments-list">
       ${commentsMarkup}
     </ul>
   `);
 };
 
-export {createCommentsTemplate};
+export default class Comments {
+  constructor(comments) {
+    this._element = null;
+    this._comments = comments;
+  }
+
+  getTemplate() {
+    return createCommentsTemplate(this._comments);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

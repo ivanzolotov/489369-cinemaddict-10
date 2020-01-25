@@ -19,11 +19,32 @@ const createMenuTemplate = (filters) => {
     .map((filter, i) => createFilterMarkup(filter, i))
     .join(`\n`);
 
-  return createElement(`
+  return (`
     <nav class="main-navigation">
       ${filtersMarkup}
     </nav>
   `);
 };
 
-export {createMenuTemplate};
+export default class Menu {
+  constructor(filters) {
+    this._element = null;
+    this._filters = filters;
+  }
+
+  getTemplate() {
+    return createMenuTemplate(this._filters);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

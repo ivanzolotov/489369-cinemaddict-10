@@ -1,14 +1,14 @@
 import {render} from './utils.js';
 
-import {createFilmsTemplate} from './components/films.js';
-import {createFilmTemplate} from './components/film.js';
-import {createFilmDetailsTemplate} from './components/film-details.js';
-import {createMenuTemplate} from './components/menu.js';
-import {createSortTemplate} from './components/sort.js';
-import {createShowMoreTemplate} from './components/show-more.js';
-import {createProfileRatingTemplate} from './components/profile-rating.js';
-import {createCommentFormTemplate} from './components/comment-form.js';
-import {createCommentsTemplate} from './components/comments.js';
+import FilmsComponent from './components/films.js';
+import FilmComponent from './components/film.js';
+import FilmDetailsComponent from './components/film-details.js';
+import MenuComponent from './components/menu.js';
+import SortComponent from './components/sort.js';
+import CommentFormComponent from './components/comment-form.js';
+import ProfileRatingComponent from './components/profile-rating.js';
+import ShowMoreComponent from './components/show-more.js';
+import CommentsComponent from './components/comments.js';
 
 import {generateFilm, generateFilms} from './mock/film.js';
 import {generateComments} from './mock/comment.js';
@@ -40,38 +40,38 @@ const films = generateFilms(FILM_COUNT);
 const comments = generateComments();
 
 const siteHeaderElement = document.querySelector(`.header`);
-render(siteHeaderElement, createProfileRatingTemplate(VIEWED_FILMS_NUMBER), `beforeend`);
+render(siteHeaderElement, new ProfileRatingComponent(VIEWED_FILMS_NUMBER).getElement(), `beforeend`);
 
 const siteMainElement = document.querySelector(`.main`);
-render(siteMainElement, createMenuTemplate(generateFilters()), `beforeend`);
-render(siteMainElement, createSortTemplate(), `beforeend`);
-render(siteMainElement, createFilmsTemplate(), `beforeend`);
+render(siteMainElement, new MenuComponent(generateFilters()).getElement(), `beforeend`);
+render(siteMainElement, new SortComponent().getElement(), `beforeend`);
+render(siteMainElement, new FilmsComponent().getElement(), `beforeend`);
 
 const allFilmsContainerElement = siteMainElement.querySelector(`.films-list`);
-render(allFilmsContainerElement, createShowMoreTemplate(), `beforeend`);
+render(allFilmsContainerElement, new ShowMoreComponent().getElement(), `beforeend`);
 
 const loadMoreButtonElement = allFilmsContainerElement.querySelector(`.films-list__show-more`);
 let visibleFilmsCount = FILMS_COUNT_ON_START;
 removePointlessLoadMoreButton(loadMoreButtonElement, visibleFilmsCount, films.length);
 
 const allFilmsElement = allFilmsContainerElement.querySelector(`.films-list__container`);
-films.slice(0, FILMS_COUNT_ON_START).forEach((film) => render(allFilmsElement, createFilmTemplate(film), `beforeend`))
+films.slice(0, FILMS_COUNT_ON_START).forEach((film) => render(allFilmsElement, new FilmComponent(film).getElement(), `beforeend`))
 
 loadMoreButtonElement.addEventListener(`click`, () => {
   const currentVisibleFilmsCount = visibleFilmsCount;
   visibleFilmsCount += FILMS_COUNT_BY_BUTTON;
 
-  films.slice(currentVisibleFilmsCount, visibleFilmsCount).forEach((film) => render(allFilmsElement, createFilmTemplate(film), `beforeend`));
+  films.slice(currentVisibleFilmsCount, visibleFilmsCount).forEach((film) => render(allFilmsElement, new FilmComponent(film).getElement(), `beforeend`));
   removePointlessLoadMoreButton(loadMoreButtonElement, visibleFilmsCount, films.length);
 });
 
 const topRatedFilmsElement = siteMainElement.querySelector(`.films-list--top-rated .films-list__container`);
-getTopRatedFilms(films, TOP_RATED_FILMS_COUNT).forEach((film) => render(topRatedFilmsElement, createFilmTemplate(film), `beforeend`));
+getTopRatedFilms(films, TOP_RATED_FILMS_COUNT).forEach((film) => render(topRatedFilmsElement, new FilmComponent(film).getElement(), `beforeend`));
 
 const mostCommentedFilmsElement = siteMainElement.querySelector(`.films-list--most-commented .films-list__container`);
-getMostCommentedFilms(films, MOST_COMMENTED_FILMS_COUNT).forEach((film) => render(mostCommentedFilmsElement, createFilmTemplate(film), `beforeend`));
+getMostCommentedFilms(films, MOST_COMMENTED_FILMS_COUNT).forEach((film) => render(mostCommentedFilmsElement, new FilmComponent(film).getElement(), `beforeend`));
 
-render(document.body, createFilmDetailsTemplate(generateFilm()), `beforeend`);
+render(document.body, new FilmDetailsComponent(generateFilm()).getElement(), `beforeend`);
 const filmDetailsCommentsWrapElement = document.querySelector(`.film-details__comments-wrap`);
-render(filmDetailsCommentsWrapElement, createCommentsTemplate(comments), `beforeend`);
-render(filmDetailsCommentsWrapElement, createCommentFormTemplate(), `beforeend`);
+render(filmDetailsCommentsWrapElement, new CommentsComponent(comments).getElement(), `beforeend`);
+render(filmDetailsCommentsWrapElement, new CommentFormComponent().getElement(), `beforeend`);

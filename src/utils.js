@@ -48,14 +48,13 @@ const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + strin
 
 const makeTwoDigitNumber = (value) => (value < 10 ? `0${value}` : String(value));
 
-// const render = (container, template, place = `beforeend`) => {
-//   container.insertAdjacentHTML(place, template);
-// };
-
 const createElement = (template) => {
   const newElement = document.createElement(`div`);
-  newElement.innerHTML = template.trimLeft();
-
+  if (template.trimLeft) {
+    newElement.innerHTML = template.trimLeft();
+  } else {
+    newElement.innerHTML = template;
+  }
   return newElement.firstChild;
 };
 

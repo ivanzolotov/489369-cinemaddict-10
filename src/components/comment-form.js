@@ -1,7 +1,7 @@
 import {createElement} from '../utils.js';
 
 const createCommentFormTemplate = () => {
-  return createElement(`
+  return (`
     <div class="film-details__new-comment">
       <div for="add-emoji" class="film-details__add-emoji-label"></div>
       <label class="film-details__comment-label">
@@ -29,4 +29,24 @@ const createCommentFormTemplate = () => {
   `);
 };
 
-export {createCommentFormTemplate};
+export default class CommentForm {
+  constructor() {
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createCommentFormTemplate();
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

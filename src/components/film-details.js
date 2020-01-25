@@ -15,7 +15,7 @@ const createFilmDetailsTemplate = (film) => {
     .map((genre) => `<span class="film-details__genre">${genre}</span>`)
     .join(`\n`);
 
-  return createElement(`
+  return (`
     <section class="film-details" style="display:none">
       <form class="film-details__inner" action="" method="get">
         <div class="form-details__top-container">
@@ -89,4 +89,25 @@ const createFilmDetailsTemplate = (film) => {
   `);
 };
 
-export {createFilmDetailsTemplate};
+export default class FilmDetails {
+  constructor(film) {
+    this._element = null;
+    this._film = film;
+  }
+
+  getTemplate() {
+    return createFilmDetailsTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
