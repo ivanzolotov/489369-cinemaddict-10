@@ -1,6 +1,7 @@
 import {render} from './utils.js';
 
 import FilmsComponent from './components/films.js';
+import NoFilmsComponent from './components/no-films.js';
 import FilmComponent from './components/film.js';
 import FilmDetailsComponent from './components/film-details.js';
 import MenuComponent from './components/menu.js';
@@ -45,7 +46,12 @@ render(siteHeaderElement, new ProfileRatingComponent(VIEWED_FILMS_NUMBER).getEle
 const siteMainElement = document.querySelector(`.main`);
 render(siteMainElement, new MenuComponent(generateFilters()).getElement(), `beforeend`);
 render(siteMainElement, new SortComponent().getElement(), `beforeend`);
-render(siteMainElement, new FilmsComponent().getElement(), `beforeend`);
+
+if (films.length > 0) {
+  render(siteMainElement, new FilmsComponent().getElement(), `beforeend`);
+} else {
+  render(siteMainElement, new NoFilmsComponent().getElement(), `beforeend`);
+}
 
 const allFilmsContainerElement = siteMainElement.querySelector(`.films-list`);
 render(allFilmsContainerElement, new ShowMoreComponent().getElement(), `beforeend`);
@@ -66,12 +72,26 @@ const renderFilm = (film, context) => {
 
   const showFilmDetails = () => {
     render(document.body, filmDetailsComponent.getElement(), `beforeend`);
+    const filmDetailsCommentsWrapElement = filmDetailsComponent.getElement().querySelector(`.film-details__comments-wrap`);
+    render(filmDetailsCommentsWrapElement, new CommentsComponent(comments).getElement(), `beforeend`);
+    render(filmDetailsCommentsWrapElement, new CommentFormComponent().getElement(), `beforeend`);
+
 
     const removeFilmDetails = () => {
       closeButtonElement.removeEventListener('click', removeFilmDetails);
       filmDetailsComponent.getElement().parentNode.removeChild(filmDetailsComponent.getElement());
     }
+
     closeButtonElement.addEventListener('click', removeFilmDetails);
+
+    const onEscKeyDown = (event) => {
+      if (event.keyCode === 27) {
+        removeFilmDetails();
+        document.removeEventListener('keydown', onEscKeyDown);
+      }
+    };
+
+    document.addEventListener('keydown', onEscKeyDown);
   };
 
   posterElement.addEventListener('click', showFilmDetails);
@@ -106,8 +126,3 @@ const mostCommentedFilmsElement = siteMainElement.querySelector(`.films-list--mo
 getMostCommentedFilms(films, MOST_COMMENTED_FILMS_COUNT).forEach((film) => {
   renderFilm(film, mostCommentedFilmsElement);
 });
-
-// render(document.body, new FilmDetailsComponent(generateFilm()).getElement(), `beforeend`);
-// const filmDetailsCommentsWrapElement = document.querySelector(`.film-details__comments-wrap`);
-// render(filmDetailsCommentsWrapElement, new CommentsComponent(comments).getElement(), `beforeend`);
-// render(filmDetailsCommentsWrapElement, new CommentFormComponent().getElement(), `beforeend`);
