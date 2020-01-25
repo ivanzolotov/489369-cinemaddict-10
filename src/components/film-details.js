@@ -1,4 +1,4 @@
-import {MONTHS, formatDuration} from '../utils.js';
+import {MONTHS, formatDuration, createElement} from '../utils.js';
 
 const createFilmDetailsTemplate = (film) => {
   const {rating, age, staff, date, duration, country, genres, description: {full: description}, comments} = film;
@@ -89,4 +89,26 @@ const createFilmDetailsTemplate = (film) => {
   `);
 };
 
-export {createFilmDetailsTemplate};
+export default class FilmDetails {
+  constructor(film) {
+    this._element = null;
+    this._film = film;
+  }
+
+  getTemplate() {
+    return createFilmDetailsTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    alert('!');
+    this._element = null;
+  }
+}

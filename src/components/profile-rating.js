@@ -1,3 +1,5 @@
+import {createElement} from '../utils.js';
+
 const createProfileRatingTemplate = (viewedFilmsNumber = 0) => {
   let rating;
 
@@ -23,4 +25,25 @@ const createProfileRatingTemplate = (viewedFilmsNumber = 0) => {
   `);
 };
 
-export {createProfileRatingTemplate};
+export default class ProfileRating {
+  constructor(viewedFilmsNumber) {
+    this._element = null;
+    this._viewedFilmsNumber = viewedFilmsNumber;
+  }
+
+  getTemplate() {
+    return createProfileRatingTemplate(this._viewedFilmsNumber);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

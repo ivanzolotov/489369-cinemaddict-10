@@ -1,4 +1,4 @@
-import {makeTwoDigitNumber} from '../utils.js';
+import {makeTwoDigitNumber, createElement} from '../utils.js';
 
 const commentMarkup = (comment) => {
   const {emotion, description, author, date} = comment;
@@ -37,4 +37,25 @@ const createCommentsTemplate = (comments) => {
   `);
 };
 
-export {createCommentsTemplate};
+export default class Comments {
+  constructor(comments) {
+    this._element = null;
+    this._comments = comments;
+  }
+
+  getTemplate() {
+    return createCommentsTemplate(this._comments);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

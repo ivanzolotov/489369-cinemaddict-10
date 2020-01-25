@@ -1,6 +1,7 @@
-import {formatDuration} from '../utils.js';
+import {formatDuration, createElement} from '../utils.js';
 
 const createFilmTemplate = (film) => {
+
   const {rating, date, duration, genres, description: {short: description}, comments} = film;
   const translatedName = film.name.translated;
   const previewPoster = film.poster.preview;
@@ -30,4 +31,25 @@ const createFilmTemplate = (film) => {
   `);
 };
 
-export {createFilmTemplate};
+export default class Film {
+  constructor(film) {
+    this._element = null;
+    this._film = film;
+  }
+
+  getTemplate() {
+    return createFilmTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

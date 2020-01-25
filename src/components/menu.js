@@ -1,4 +1,4 @@
-import {capitalizeFirstLetter} from '../utils.js';
+import {capitalizeFirstLetter, createElement} from '../utils.js';
 
 const createFilterMarkup = (filter, index) => {
   const hash = `#${filter.name.split(` `)[0]}`;
@@ -26,4 +26,25 @@ const createMenuTemplate = (filters) => {
   `);
 };
 
-export {createMenuTemplate};
+export default class Menu {
+  constructor(filters) {
+    this._element = null;
+    this._filters = filters;
+  }
+
+  getTemplate() {
+    return createMenuTemplate(this._filters);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

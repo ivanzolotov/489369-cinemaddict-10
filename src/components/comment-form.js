@@ -1,3 +1,5 @@
+import {createElement} from '../utils.js';
+
 const createCommentFormTemplate = () => {
   return (`
     <div class="film-details__new-comment">
@@ -27,4 +29,24 @@ const createCommentFormTemplate = () => {
   `);
 };
 
-export {createCommentFormTemplate};
+export default class CommentForm {
+  constructor() {
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createCommentFormTemplate();
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
