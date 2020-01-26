@@ -1,4 +1,5 @@
-import {capitalizeFirstLetter, createElement} from '../utils.js';
+import AbstractComponent from './abstract-component.js';
+import {capitalizeFirstLetter} from '../utils/common.js';
 
 const createFilterMarkup = (filter, index) => {
   const hash = `#${filter.name.split(` `)[0]}`;
@@ -26,25 +27,14 @@ const createMenuTemplate = (filters) => {
   `);
 };
 
-export default class Menu {
+export default class Menu extends AbstractComponent {
   constructor(filters) {
-    this._element = null;
+    super();
+
     this._filters = filters;
   }
 
   getTemplate() {
     return createMenuTemplate(this._filters);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

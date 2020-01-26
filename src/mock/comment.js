@@ -1,4 +1,4 @@
-import {getRandomArrayItem, getRandomArrayItems, getRandomDateInPast} from '../utils.js';
+import {getRandomArrayItem, getRandomArrayItems, getRandomDateInPast} from '../utils/common.js';
 
 const DEFAULT_COMMENTS_NUMBER = 10;
 

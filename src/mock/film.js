@@ -1,4 +1,4 @@
-import {getRandomArrayItem, getRandomArrayItems, getRandomDateInPast} from '../utils.js';
+import {getRandomArrayItem, getRandomArrayItems, getRandomDateInPast} from '../utils/common.js';
 
 const DEFAULT_FILMS_NUMBER = 15;
 const DURATION_MAXIMUM = 200;

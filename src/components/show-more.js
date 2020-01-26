@@ -1,4 +1,5 @@
-import {createElement} from '../utils.js';
+import AbstractComponent from './abstract-component.js';
+import {remove} from '../utils/render.js';
 
 const createShowMoreTemplate = () => {
   return (`
@@ -6,24 +7,20 @@ const createShowMoreTemplate = () => {
   `);
 };
 
-export default class ShowMore {
-  constructor() {
-    this._element = null;
-  }
+export default class ShowMore extends AbstractComponent {
 
   getTemplate() {
     return createShowMoreTemplate();
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
+  setClickHandler(handler) {
+    this.getElement().addEventListener(`click`, handler);
+  }
+
+  removeIfUnnesessary(showedFilms, loadedFilms) {
+    if (showedFilms >= loadedFilms) {
+      remove(this);
     }
-
-    return this._element;
   }
 
-  removeElement() {
-    this._element = null;
-  }
 }
