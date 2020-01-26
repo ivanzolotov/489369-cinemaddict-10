@@ -1,5 +1,5 @@
 import AbstractComponent from './abstract-component.js';
-import {capitalizeFirstLetter} from '../utils.js';
+import {capitalizeFirstLetter} from '../utils/common.js';
 
 const createFilterMarkup = (filter, index) => {
   const hash = `#${filter.name.split(` `)[0]}`;

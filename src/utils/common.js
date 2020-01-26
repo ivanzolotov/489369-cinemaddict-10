@@ -48,27 +48,6 @@ const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + strin
 
 const makeTwoDigitNumber = (value) => (value < 10 ? `0${value}` : String(value));
 
-const createElement = (template) => {
-  const newElement = document.createElement(`div`);
-  if (template.trimLeft) {
-    newElement.innerHTML = template.trimLeft();
-  } else {
-    newElement.innerHTML = template;
-  }
-  return newElement.firstChild;
-};
-
-const render = (container, element, place) => {
-  switch (place) {
-    case RenderPosition.AFTERBEGIN:
-      container.prepend(element);
-      break;
-    case RenderPosition.BEFOREEND:
-      container.append(element);
-      break;
-  }
-};
-
 export {
   MONTHS,
   getRandomBoolean,
@@ -78,6 +57,4 @@ export {
   formatDuration,
   capitalizeFirstLetter,
   makeTwoDigitNumber,
-  createElement,
-  render,
 };

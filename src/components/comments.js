@@ -1,5 +1,5 @@
 import AbstractComponent from './abstract-component.js';
-import {makeTwoDigitNumber} from '../utils.js';
+import {makeTwoDigitNumber} from '../utils/common.js';
 
 const commentMarkup = (comment) => {
   const {emotion, description, author, date} = comment;

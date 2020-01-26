@@ -1,5 +1,5 @@
 import AbstractComponent from './abstract-component.js';
-import {formatDuration} from '../utils.js';
+import {formatDuration} from '../utils/common.js';
 
 const createFilmTemplate = (film) => {
 

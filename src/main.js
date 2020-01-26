@@ -1,4 +1,4 @@
-import {render} from './utils.js';
+import {render, remove} from './utils/render.js';
 
 import FilmsComponent from './components/films.js';
 import NoFilmsComponent from './components/no-films.js';
@@ -41,20 +41,20 @@ const films = generateFilms(FILM_COUNT);
 const comments = generateComments();
 
 const siteHeaderElement = document.querySelector(`.header`);
-render(siteHeaderElement, new ProfileRatingComponent(VIEWED_FILMS_NUMBER).getElement(), `beforeend`);
+render(siteHeaderElement, new ProfileRatingComponent(VIEWED_FILMS_NUMBER), `beforeend`);
 
 const siteMainElement = document.querySelector(`.main`);
-render(siteMainElement, new MenuComponent(generateFilters()).getElement(), `beforeend`);
-render(siteMainElement, new SortComponent().getElement(), `beforeend`);
+render(siteMainElement, new MenuComponent(generateFilters()), `beforeend`);
+render(siteMainElement, new SortComponent(), `beforeend`);
 
 if (films.length > 0) {
-  render(siteMainElement, new FilmsComponent().getElement(), `beforeend`);
+  render(siteMainElement, new FilmsComponent(), `beforeend`);
 } else {
-  render(siteMainElement, new NoFilmsComponent().getElement(), `beforeend`);
+  render(siteMainElement, new NoFilmsComponent(), `beforeend`);
 }
 
 const allFilmsContainerElement = siteMainElement.querySelector(`.films-list`);
-render(allFilmsContainerElement, new ShowMoreComponent().getElement(), `beforeend`);
+render(allFilmsContainerElement, new ShowMoreComponent(), `beforeend`);
 
 const loadMoreButtonElement = allFilmsContainerElement.querySelector(`.films-list__show-more`);
 let visibleFilmsCount = FILMS_COUNT_ON_START;
@@ -71,18 +71,21 @@ const renderFilm = (film, context) => {
   const closeButtonElement = filmDetailsComponent.getElement().querySelector(`.film-details__close-btn`);
 
   const showFilmDetails = () => {
-    render(document.body, filmDetailsComponent.getElement(), `beforeend`);
+    render(document.body, filmDetailsComponent, `beforeend`);
     const filmDetailsCommentsWrapElement = filmDetailsComponent.getElement().querySelector(`.film-details__comments-wrap`);
-    render(filmDetailsCommentsWrapElement, new CommentsComponent(comments).getElement(), `beforeend`);
-    render(filmDetailsCommentsWrapElement, new CommentFormComponent().getElement(), `beforeend`);
+    render(filmDetailsCommentsWrapElement, new CommentsComponent(comments), `beforeend`);
+    render(filmDetailsCommentsWrapElement, new CommentFormComponent(), `beforeend`);
 
 
     const removeFilmDetails = () => {
-      closeButtonElement.removeEventListener('click', removeFilmDetails);
-      filmDetailsComponent.getElement().parentNode.removeChild(filmDetailsComponent.getElement());
+      remove(filmDetailsComponent);
     }
 
-    closeButtonElement.addEventListener('click', removeFilmDetails);
+    const onCloseDetailsClick = () => {
+      removeFilmDetails();
+      document.removeEventListener('keydown', onEscKeyDown);
+      closeButtonElement.removeEventListener('click', removeFilmDetails);
+    }
 
     const onEscKeyDown = (event) => {
       if (event.keyCode === 27) {
@@ -91,6 +94,8 @@ const renderFilm = (film, context) => {
       }
     };
 
+    closeButtonElement.addEventListener('click', onCloseDetailsClick);
+
     document.addEventListener('keydown', onEscKeyDown);
   };
 
@@ -98,7 +103,7 @@ const renderFilm = (film, context) => {
   titleElement.addEventListener('click', showFilmDetails);
   commentsElement.addEventListener('click', showFilmDetails);
 
-  render(context, filmComponent.getElement(), `beforeend`);
+  render(context, filmComponent, `beforeend`);
 }
 
 const allFilmsElement = allFilmsContainerElement.querySelector(`.films-list__container`);

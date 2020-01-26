@@ -1,5 +1,5 @@
 import AbstractComponent from './abstract-component.js';
-import {MONTHS, formatDuration} from '../utils.js';
+import {MONTHS, formatDuration} from '../utils/common.js';
 
 const createFilmDetailsTemplate = (film) => {
   const {rating, age, staff, date, duration, country, genres, description: {full: description}, comments} = film;
