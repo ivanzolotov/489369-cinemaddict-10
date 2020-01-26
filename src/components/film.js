@@ -1,4 +1,5 @@
-import {formatDuration, createElement} from '../utils.js';
+import AbstractComponent from './abstract-component.js';
+import {formatDuration} from '../utils.js';
 
 const createFilmTemplate = (film) => {
 
@@ -31,25 +32,14 @@ const createFilmTemplate = (film) => {
   `);
 };
 
-export default class Film {
+export default class Film extends AbstractComponent {
   constructor(film) {
-    this._element = null;
+    super();
+
     this._film = film;
   }
 
   getTemplate() {
     return createFilmTemplate(this._film);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

@@ -1,4 +1,5 @@
-import {makeTwoDigitNumber, createElement} from '../utils.js';
+import AbstractComponent from './abstract-component.js';
+import {makeTwoDigitNumber} from '../utils.js';
 
 const commentMarkup = (comment) => {
   const {emotion, description, author, date} = comment;
@@ -37,25 +38,14 @@ const createCommentsTemplate = (comments) => {
   `);
 };
 
-export default class Comments {
+export default class Comments extends AbstractComponent {
   constructor(comments) {
-    this._element = null;
+    super();
+
     this._comments = comments;
   }
 
   getTemplate() {
     return createCommentsTemplate(this._comments);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

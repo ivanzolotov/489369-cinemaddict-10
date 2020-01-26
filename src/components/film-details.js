@@ -1,4 +1,5 @@
-import {MONTHS, formatDuration, createElement} from '../utils.js';
+import AbstractComponent from './abstract-component.js';
+import {MONTHS, formatDuration} from '../utils.js';
 
 const createFilmDetailsTemplate = (film) => {
   const {rating, age, staff, date, duration, country, genres, description: {full: description}, comments} = film;
@@ -89,26 +90,14 @@ const createFilmDetailsTemplate = (film) => {
   `);
 };
 
-export default class FilmDetails {
+export default class FilmDetails extends AbstractComponent {
   constructor(film) {
-    this._element = null;
+    super();
+
     this._film = film;
   }
 
   getTemplate() {
     return createFilmDetailsTemplate(this._film);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    alert('!');
-    this._element = null;
   }
 }
