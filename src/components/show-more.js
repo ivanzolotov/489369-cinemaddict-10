@@ -1,4 +1,5 @@
 import AbstractComponent from './abstract-component.js';
+import {remove} from '../utils/render.js';
 
 const createShowMoreTemplate = () => {
   return (`
@@ -14,6 +15,12 @@ export default class ShowMore extends AbstractComponent {
 
   setClickHandler(handler) {
     this.getElement().addEventListener(`click`, handler);
+  }
+
+  removeIfUnnesessary(showedFilms, loadedFilms) {
+    if (showedFilms >= loadedFilms) {
+      remove(this);
+    }
   }
 
 }
