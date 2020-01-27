@@ -1,5 +1,6 @@
 import {render, remove} from '../utils/render.js';
 
+import SortComponent, {SortType} from '../components/sort.js';
 import FilmsComponent from '../components/films.js';
 import NoFilmsComponent from '../components/no-films.js';
 import FilmComponent from '../components/film.js';
@@ -53,15 +54,25 @@ const renderFilm = (film, context) => {
   render(context, filmComponent, `beforeend`);
 };
 
+const renderFilms = (container, films) => {
+  films.forEach((film) => {
+    renderFilm(film, container);
+  })
+};
+
 export default class PageController {
   constructor(element) {
     this._element = element;
+    this._sortComponent = new SortComponent();
     this._filmsComponent = new FilmsComponent();
     this._noFilmsComponent = new NoFilmsComponent();
     this._showMoreComponent = new ShowMoreComponent()
   }
 
   render(films) {
+
+    render(this._element, this._sortComponent, `beforeend`);
+
     // Рендеринг доски-обёртки
     if (films.length > 0) {
       render(this._element, this._filmsComponent, `beforeend`);
@@ -70,25 +81,55 @@ export default class PageController {
     }
     const container = this._filmsComponent.getElement();
 
-    // Рендеринг фильмов в основной раздел
+    // Рендеринг фильмов в основной раздел и кнопки «Show More»
     const allFilmsContainerElement = container.querySelector(`.films-list`);
     const allFilmsElement = allFilmsContainerElement.querySelector(`.films-list__container`);
-    films.slice(0, FILMS_COUNT_ON_START).forEach((film) => {
-      renderFilm(film, allFilmsElement);
+
+    let visibleFilmsCount = FILMS_COUNT_ON_START;
+    renderFilms(allFilmsElement, films.slice(0, FILMS_COUNT_ON_START));
+
+    const renderShowMoreButton = () => {
+      if (visibleFilmsCount >= films.length) {
+        return;
+      }
+      render(allFilmsContainerElement, this._showMoreComponent, `beforeend`);
+      this._showMoreComponent.setClickHandler(() => {
+        const currentVisibleFilmsCount = visibleFilmsCount;
+        visibleFilmsCount += FILMS_COUNT_BY_BUTTON;
+        renderFilms(allFilmsElement, films.slice(currentVisibleFilmsCount, visibleFilmsCount));
+        this._showMoreComponent.removeIfUnnesessary(visibleFilmsCount, films.length);
+      });
+    };
+
+    renderShowMoreButton();
+
+    this._sortComponent.setSortTypeChangeHandler((sortType) => {
+      let sortedFilms = [];
+
+      switch (sortType) {
+        case SortType.DATE:
+          sortedFilms = films.slice().sort((a, b) => a.date - b.date);
+          break;
+        case SortType.RATING:
+          sortedFilms = films.slice().sort((a, b) => b.rating - a.rating);
+          break;
+        case SortType.DEFAULT:
+          sortedFilms = films.slice(0, visibleFilmsCount);
+          break;
+      }
+      allFilmsElement.innerHTML = ``;
+      renderFilms(allFilmsElement, sortedFilms);
+      if (sortType === SortType.DEFAULT) {
+        renderShowMoreButton();
+      } else {
+        remove(this._showMoreComponent);
+      }
     });
 
-    // Рендеринг «Load More» в основной раздел
-    render(allFilmsContainerElement, this._showMoreComponent, `beforeend`);
-    let visibleFilmsCount = FILMS_COUNT_ON_START;
-    this._showMoreComponent.removeIfUnnesessary(visibleFilmsCount, films.length);
-    this._showMoreComponent.setClickHandler(() => {
-      const currentVisibleFilmsCount = visibleFilmsCount;
-      visibleFilmsCount += FILMS_COUNT_BY_BUTTON;
-      films.slice(currentVisibleFilmsCount, visibleFilmsCount).forEach((film) => {
-        renderFilm(film, allFilmsElement);
-      });
-      this._showMoreComponent.removeIfUnnesessary(visibleFilmsCount, films.length);
-    });
+
+
+
+
 
     // Рендеринг фильмов во второй раздел
     const topRatedFilmsElement = container.querySelector(`.films-list--top-rated .films-list__container`);
