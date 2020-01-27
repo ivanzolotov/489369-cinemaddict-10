@@ -1,7 +1,6 @@
 import {render} from './utils/render.js';
 
 import MenuComponent from './components/menu.js';
-import SortComponent from './components/sort.js';
 import ProfileRatingComponent from './components/profile-rating.js';
 
 import PageController from './controllers/page.js';
@@ -18,7 +17,6 @@ const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 render(siteHeaderElement, new ProfileRatingComponent(VIEWED_FILMS_NUMBER), `beforeend`);
 render(siteMainElement, new MenuComponent(generateFilters()), `beforeend`);
-render(siteMainElement, new SortComponent(), `beforeend`);
 
 const pageController = new PageController(siteMainElement);
 pageController.render(films);
